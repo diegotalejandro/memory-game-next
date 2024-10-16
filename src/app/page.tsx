@@ -14,7 +14,7 @@ export default function Home() {
 
   useEffect(() => {
 
-    if (userName) {
+    if (userName && userName !== name) {
       setName(userName);
       router.push('/game');
     }
@@ -39,6 +39,7 @@ export default function Home() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="mb-4 p-2 bg-white dark:bg-gray-700 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 hover:border-black focus:border-black dark:hover:border-gray-600 dark:focus:border-gray-600 dark:border-gray-700"
+          required
         />
         <div className="flex justify-end mt-4">
           <Button
