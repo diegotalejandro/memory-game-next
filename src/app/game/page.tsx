@@ -25,9 +25,9 @@ export default function Game() {
                 <Card className=" w-80 p-4 flex flex-col justify-center items-center bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:border-gray-700">
                     <h2 className="flex justify-center text-3xl font-bold text-slate-900 dark:text-slate-100">{userName}</h2>
                     <hr className="my-4 border-gray-300 dark:border-gray-700" />
-                    {userName && <p className=" mb-4 text-slate-900 dark:text-slate-100 flex flex-wrap justify-center">
-                        <Typography className="mr-2 text-3xl">✅: {matches}</Typography>
-                        <Typography className='text-3xl'>❌: {errors}</Typography>
+                    {userName && <p className=" mb-4 flex flex-wrap justify-center">
+                        <Typography className="mr-2 text-3xl text-slate-900 dark:text-slate-100">✅: {matches}</Typography>
+                        <Typography className='text-3xl text-slate-900 dark:text-slate-100'>❌: {errors}</Typography>
                     </p>}
                 </Card>
             </div>
