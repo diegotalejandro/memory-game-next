@@ -1,6 +1,6 @@
 "use client"
 
-import { Card, Button } from 'antd';
+import { Card, Button, Typography } from 'antd';
 import Image from 'next/image';
 import { QuestionCircleFilled } from '@ant-design/icons';
 import ReactConfetti from 'react-confetti';
@@ -22,10 +22,13 @@ export default function Game() {
     return (
         <div className="flex flex-col items-center min-h-screen bg-gray-100 dark:bg-gray-900">
             <div className='w-full mb-4 mt-4 flex justify-center'>
-                <Card className=" w-64 p-4 flex flex-col justify-center items-center bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:border-gray-700">
+                <Card className=" w-80 p-4 flex flex-col justify-center items-center bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:border-gray-700">
                     <h2 className="flex justify-center text-3xl font-bold text-slate-900 dark:text-slate-100">{userName}</h2>
                     <hr className="my-4 border-gray-300 dark:border-gray-700" />
-                    {userName && <p className="text-3xl mb-4 text-slate-900 dark:text-slate-100">✅: {matches} - ❌: {errors}</p>}
+                    {userName && <p className=" mb-4 text-slate-900 dark:text-slate-100 flex flex-wrap justify-center">
+                        <Typography className="mr-2 text-3xl">✅: {matches}</Typography>
+                        <Typography className='text-3xl'>❌: {errors}</Typography>
+                    </p>}
                 </Card>
             </div>
             <div className="w-auto grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-10 gap-4 place-items-center">
