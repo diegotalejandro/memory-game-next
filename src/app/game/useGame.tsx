@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useStorage } from '../hooks/useStorage';
 import { getCards } from '../api/card';
 import { ICard } from '../types/types';
 import { useGlobalContext } from '../context/GlobalContext';
@@ -11,12 +10,10 @@ export default function useGame() {
     const [cards, setCards] = useState<ICard[]>([]);
     const [flippedCards, setFlippedCards] = useState<number[]>([]);
     const [matchedCards, setMatchedCards] = useState<ICard[]>([]);
-    const [name, setName] = useState<string | null>(null);
     const [matches, setMatches] = useState<number>(0);
     const [errors, setErrors] = useState<number>(0);
     const router = useRouter();
-    const { getLocalStorage } = useStorage();
-    const { setLoading } = useGlobalContext();
+    const { userName, screenDimensions, setLoading } = useGlobalContext();
 
     const asyncGetCards = async () => {
         setLoading(true);
@@ -71,27 +68,29 @@ export default function useGame() {
         return cards.length > 0 && matchedCards.length === cards.length / 2;
     };
 
+
+
     useEffect(() => {
-        const storedName = getLocalStorage('name');
-        if (!storedName) {
-            router.push('/');
-        } else {
-            setName(storedName);
+        if (!userName) {
+            router.replace('/');
         }
-    }, [router]);
+    }, [userName, router]);
 
     useEffect(() => {
         asyncGetCards();
     }, []);
 
+
+
     return {
         // variables
-        name,
+        userName,
         cards,
         flippedCards,
         matchedCards,
         matches,
         errors,
+        screenDimensions,
         // methods
         handleCardClick,
         resetGame,

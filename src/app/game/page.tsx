@@ -1,22 +1,18 @@
 "use client"
 
 import { Card, Button } from 'antd';
-import useGame from './useGame';
 import Image from 'next/image';
 import { QuestionCircleFilled } from '@ant-design/icons';
 import ReactConfetti from 'react-confetti';
-
-const screenDimensions = {
-    width: window.innerWidth,
-    height: window.innerHeight
-}
+import useGame from './useGame';
 
 export default function Game() {
     const {
-        name,
+        userName,
         cards,
         matches,
         errors,
+        screenDimensions,
         handleCardClick,
         resetGame,
         showCardImage,
@@ -24,12 +20,12 @@ export default function Game() {
     } = useGame();
 
     return (
-        <div className="flex flex-col items-center h-screen bg-gray-100 dark:bg-gray-900">
+        <div className="flex flex-col items-center min-h-screen bg-gray-100 dark:bg-gray-900">
             <div className='w-full mb-4 mt-4 flex justify-center'>
                 <Card className=" w-64 p-4 flex flex-col justify-center items-center bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:border-gray-700">
-                    <h2 className="flex justify-center text-3xl font-bold text-slate-900 dark:text-slate-100">{name}</h2>
+                    <h2 className="flex justify-center text-3xl font-bold text-slate-900 dark:text-slate-100">{userName}</h2>
                     <hr className="my-4 border-gray-300 dark:border-gray-700" />
-                    {name && <p className="text-3xl mb-4 text-slate-900 dark:text-slate-100">✅: {matches} - ❌: {errors}</p>}
+                    {userName && <p className="text-3xl mb-4 text-slate-900 dark:text-slate-100">✅: {matches} - ❌: {errors}</p>}
                 </Card>
             </div>
             <div className="w-auto grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-10 gap-4 place-items-center">

@@ -3,25 +3,26 @@
 import { useState, useEffect } from 'react';
 import { Input, Button, Card } from 'antd';
 import { useRouter } from 'next/navigation';
-import { useStorage } from './hooks/useStorage';
+import { useGlobalContext } from './context/GlobalContext';
 
 export default function Home() {
   const [name, setName] = useState<string>('');
 
-  const { getLocalStorage, setLocalStorage } = useStorage();
   const router = useRouter();
+  const { userName, setUserName } = useGlobalContext();
+
 
   useEffect(() => {
-    const storedName = getLocalStorage('name');
-    if (storedName) {
-      setName(storedName);
+
+    if (userName) {
+      setName(userName);
       router.push('/game');
     }
-  }, [router]);
+  }, [router, userName]);
 
   const handleStart = () => {
     if (name.trim()) {
-      setLocalStorage('name', name);
+      setUserName(name);
       router.push('/game');
     }
   };
@@ -44,7 +45,7 @@ export default function Home() {
             type="primary"
             onClick={handleStart}
             disabled={!name.trim()}
-            className="bg-black hover:bg-cyan-100 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:text-white"
+            className="bg-black hover:bg-cyan-100 text-black dark:text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:text-black dark:disabled:text-white "
           >
             Start Game
           </Button>
